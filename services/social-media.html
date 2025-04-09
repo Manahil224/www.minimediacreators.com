@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Management - MMC</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a0f3c 0%, #4a1d96 50%, #dc2626 100%);
+        }
+        .package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(74, 29, 150, 0.2);
+        }
+        .feature-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .feature-list li i {
+            color: #4a1d96;
+            margin-right: 0.5rem;
+        }
+        .platform-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .fa-facebook { color: #4267B2; }
+        .fa-instagram { color: #C13584; }
+        .fa-twitter { color: #1DA1F2; }
+        .fa-linkedin { color: #0077B5; }
+        .fa-youtube { color: #FF0000; }
+        /* AI Chat Helper Styles */
+        .ai-chat-helper {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 360px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .ai-chat-header {
+            background: linear-gradient(135deg, #4a1d96, #7c3aed);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+        .ai-chat-body {
+            height: 400px;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .ai-chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        .ai-message {
+            background: #f3f4f6;
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 80%;
+            align-self: flex-start;
+        }
+        .user-message {
+            background: #4a1d96;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 80%;
+            align-self: flex-end;
+        }
+        .ai-chat-helper.minimized {
+            transform: translateY(calc(100% - 60px));
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white p-4">
+        <div class="container mx-auto">
+            <a href="../index.html" class="text-2xl font-bold">MMC</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-purple-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">Social Media Management</h1>
+            <p class="text-xl mb-8">Boost your brand's social presence with our expert management services</p>
+            <div class="flex justify-center space-x-8">
+                <i class="fab fa-facebook platform-icon"></i>
+                <i class="fab fa-instagram platform-icon"></i>
+                <i class="fab fa-twitter platform-icon"></i>
+                <i class="fab fa-linkedin platform-icon"></i>
+                <i class="fab fa-youtube platform-icon"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="text-center p-6">
+                    <i class="fas fa-bullhorn text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Content Strategy</h3>
+                    <p class="text-gray-600">Tailored content plans for your audience</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-chart-line text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Growth Analytics</h3>
+                    <p class="text-gray-600">Data-driven engagement strategies</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-comments text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Community Management</h3>
+                    <p class="text-gray-600">Active audience engagement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Packages -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Our Social Media Packages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Starter Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$299/mo</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> 2 Social Media Platforms</li>
+                        <li><i class="fas fa-check"></i> 12 Posts per Month</li>
+                        <li><i class="fas fa-check"></i> Basic Content Creation</li>
+                        <li><i class="fas fa-check"></i> Community Management</li>
+                        <li><i class="fas fa-check"></i> Monthly Performance Report</li>
+                        <li><i class="fas fa-check"></i> Basic Hashtag Strategy</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Professional Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8 border-2 border-purple-600">
+                    <div class="text-center text-purple-600 text-sm font-bold mb-4">MOST POPULAR</div>
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Growth Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$599/mo</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> 4 Social Media Platforms</li>
+                        <li><i class="fas fa-check"></i> 20 Posts per Month</li>
+                        <li><i class="fas fa-check"></i> Premium Content Creation</li>
+                        <li><i class="fas fa-check"></i> Active Community Management</li>
+                        <li><i class="fas fa-check"></i> Weekly Performance Reports</li>
+                        <li><i class="fas fa-check"></i> Advanced Hashtag Strategy</li>
+                        <li><i class="fas fa-check"></i> Competitor Analysis</li>
+                        <li><i class="fas fa-check"></i> Story/Reel Creation</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Enterprise Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$999/mo</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> All Social Media Platforms</li>
+                        <li><i class="fas fa-check"></i> 30 Posts per Month</li>
+                        <li><i class="fas fa-check"></i> Premium Content Creation</li>
+                        <li><i class="fas fa-check"></i> 24/7 Community Management</li>
+                        <li><i class="fas fa-check"></i> Daily Performance Updates</li>
+                        <li><i class="fas fa-check"></i> Custom Hashtag Strategy</li>
+                        <li><i class="fas fa-check"></i> Advanced Analytics</li>
+                        <li><i class="fas fa-check"></i> Influencer Outreach</li>
+                        <li><i class="fas fa-check"></i> Crisis Management</li>
+                        <li><i class="fas fa-check"></i> Social Media Advertising</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Get Started Today</h2>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block mb-2">Name</label>
+                        <input type="text" class="w-full p-3 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Email</label>
+                        <input type="email" class="w-full p-3 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Package</label>
+                        <select class="w-full p-3 rounded border" required>
+                            <option value="">Select a Package</option>
+                            <option value="starter">Starter Package</option>
+                            <option value="growth">Growth Package</option>
+                            <option value="enterprise">Enterprise Package</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Message</label>
+                        <textarea class="w-full p-3 rounded border" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Helper -->
+    <div class="ai-chat-helper" id="aiChatHelper">
+        <div class="ai-chat-header">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-robot"></i>
+                <span class="font-semibold">MMC AI Assistant</span>
+            </div>
+            <button onclick="toggleChat()" class="text-white hover:text-gray-200">
+                <i class="fas fa-minus" id="chatToggleIcon"></i>
+            </button>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-message">
+                Hello! 👋 I'm your MMC AI assistant. I can help you with:
+                <ul class="mt-2 ml-4 list-disc">
+                    <li>Choosing the best social media package</li>
+                    <li>Platform-specific strategies</li>
+                    <li>Content creation tips</li>
+                    <li>Understanding our management approach</li>
+                </ul>
+                How can I assist you today?
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="userInput" 
+                class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600" 
+                placeholder="Type your message...">
+            <button onclick="sendMessage()" 
+                class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chatHelper = document.getElementById('aiChatHelper');
+            const toggleIcon = document.getElementById('chatToggleIcon');
+            chatHelper.classList.toggle('minimized');
+            toggleIcon.classList.toggle('fa-minus');
+            toggleIcon.classList.toggle('fa-plus');
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBody = document.getElementById('chatBody');
+            const message = userInput.value.trim();
+
+            if (message) {
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'user-message';
+                userMsg.textContent = message;
+                chatBody.appendChild(userMsg);
+
+                // Simulate AI response
+                setTimeout(() => {
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'ai-message';
+                    aiMsg.textContent = getAIResponse(message);
+                    chatBody.appendChild(aiMsg);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 500);
+
+                userInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
+        function getAIResponse(message) {
+            const responses = {
+                'pricing': 'Our social media management packages start from $299/mo for the Starter Package, $599/mo for the Growth Package, and $999/mo for the Enterprise Package. Each package includes different levels of service and post frequency. Would you like to know more about a specific package?',
+                'package': 'We offer three packages: Starter (2 platforms, 12 posts/month), Growth (4 platforms, 20 posts/month), and Enterprise (all platforms, 30 posts/month). The Growth Package is our most popular choice. Which would you like to learn more about?',
+                'platform': 'We manage all major social media platforms including Facebook, Instagram, Twitter, LinkedIn, and YouTube. Each platform requires a different strategy, and we tailor our approach accordingly.',
+                'content': 'We create engaging, platform-specific content including images, videos, stories, and posts. Our team handles everything from content creation to scheduling and analytics.',
+                'contact': 'You can reach us through the contact form below, or I can help answer any immediate questions you have!',
+                'default': 'I\'d be happy to help you with your social media management needs. Could you please provide more details about what you\'re looking for?'
+            };
+
+            message = message.toLowerCase();
+            if (message.includes('price') || message.includes('cost')) return responses.pricing;
+            if (message.includes('package') || message.includes('plan')) return responses.package;
+            if (message.includes('platform') || message.includes('facebook') || message.includes('instagram')) return responses.platform;
+            if (message.includes('content') || message.includes('post')) return responses.content;
+            if (message.includes('contact') || message.includes('reach')) return responses.contact;
+            return responses.default;
+        }
+
+        // Add event listener for Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Mini Mind Creators. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

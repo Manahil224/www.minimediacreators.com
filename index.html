@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMC - Mini Mind Creators</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a0f3c 0%, #4a1d96 50%, #dc2626 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Navigation specific gradient */
+        nav.gradient-bg {
+            background: linear-gradient(to right, #2d1b69 0%, #4a1d96 70%, #7c3aed 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav.gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, 
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05) 50%,
+                transparent
+            );
+            pointer-events: none;
+        }
+        
+        /* Glow effect behind elements */
+        .glow-effect {
+            position: relative;
+        }
+        
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::before {
+            opacity: 1;
+        }
+
+        /* Neon glow for service cards */
+        .service-card {
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(74, 29, 150, 0.1);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 20px rgba(74, 29, 150, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Glowing text effect */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.03);
+            transition: transform 0.3s ease;
+        }
+        .logo-container {
+            width: 50px;
+            height: 50px;
+        }
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .search-container {
+            position: relative;
+        }
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+        .search-results.active {
+            display: block;
+        }
+
+        /* Floating Icons Styles */
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 40;
+            overflow: hidden;
+        }
+
+        .floating-icon {
+            position: absolute;
+            animation: float 15s linear infinite;
+            pointer-events: none;
+            transition: color 0.3s ease;
+            font-size: 24px;
+            opacity: 0.2;
+        }
+
+        /* Social media icon colors */
+        .floating-icon.fa-facebook { color: #4267B2; }
+        .floating-icon.fa-instagram { color: #C13584; }
+        .floating-icon.fa-youtube { color: #FF0000; }
+        .floating-icon.fa-twitter { color: #1DA1F2; }
+        .floating-icon.fa-linkedin { color: #0077B5; }
+        .floating-icon.fa-tiktok { color: #000000; }
+
+        /* Floating animation */
+        @keyframes float {
+            0% {
+                transform: translate(0, 100vh) rotate(0deg);
+            }
+            100% {
+                transform: translate(0, -100vh) rotate(360deg);
+            }
+        }
+
+        /* Alternate animation */
+        @keyframes floatReverse {
+            0% {
+                transform: translate(0, -100vh) rotate(360deg);
+            }
+            100% {
+                transform: translate(0, 100vh) rotate(0deg);
+            }
+        }
+
+        /* Position and animate icons */
+        .floating-icon:nth-child(1) { left: 5%; animation-duration: 15s; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { left: 15%; animation-duration: 18s; animation-delay: 2s; animation-name: floatReverse; }
+        .floating-icon:nth-child(3) { left: 25%; animation-duration: 20s; animation-delay: 4s; }
+        .floating-icon:nth-child(4) { left: 35%; animation-duration: 16s; animation-delay: 6s; animation-name: floatReverse; }
+        .floating-icon:nth-child(5) { left: 45%; animation-duration: 19s; animation-delay: 8s; }
+        .floating-icon:nth-child(6) { left: 55%; animation-duration: 17s; animation-delay: 10s; animation-name: floatReverse; }
+        .floating-icon:nth-child(7) { left: 65%; animation-duration: 22s; animation-delay: 12s; }
+        .floating-icon:nth-child(8) { left: 75%; animation-duration: 21s; animation-delay: 14s; animation-name: floatReverse; }
+        .floating-icon:nth-child(9) { left: 85%; animation-duration: 23s; animation-delay: 16s; }
+        .floating-icon:nth-child(10) { left: 95%; animation-duration: 24s; animation-delay: 18s; animation-name: floatReverse; }
+
+        /* Simplify the services title animation */
+        .services-title {
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+            background: linear-gradient(45deg, #4a1d96, #7c3aed, #dc2626);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 0 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Remove title glow animation */
+        @keyframes titleGlow {
+            from, to {
+                filter: none;
+            }
+        }
+
+        /* Simplify the services section background */
+        .services-section {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        /* Remove the background text effect */
+        .services-title-container::before {
+            display: none;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 400px;
+            background: rgba(74, 29, 150, 0.05);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .slide-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: #4a1d96;
+            transform: scale(1.2);
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(74, 29, 150, 0.8);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-button:hover {
+            background: rgba(74, 29, 150, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-button.prev {
+            left: 20px;
+        }
+
+        .slider-button.next {
+            right: 20px;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+        }
+
+        /* Text Click Light Effect */
+        .text-light-effect {
+            position: relative;
+            cursor: pointer;
+        }
+
+        @keyframes textLightPulse {
+            0% {
+                text-shadow: 0 0 0 rgba(124, 58, 237, 0);
+            }
+            50% {
+                text-shadow: 0 0 15px rgba(124, 58, 237, 0.8),
+                            0 0 30px rgba(124, 58, 237, 0.6),
+                            0 0 45px rgba(124, 58, 237, 0.4);
+            }
+            100% {
+                text-shadow: 0 0 0 rgba(124, 58, 237, 0);
+            }
+        }
+
+        .text-light-active {
+            animation: textLightPulse 0.5s ease-out;
+        }
+
+        /* AI Chat Helper Styles */
+        .ai-chat-helper {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 360px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .ai-chat-header {
+            background: linear-gradient(135deg, #4a1d96, #7c3aed);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            cursor: pointer;
+        }
+        .ai-chat-body {
+            height: 400px;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .ai-chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        .ai-message {
+            background: #f3f4f6;
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 80%;
+            align-self: flex-start;
+        }
+        .user-message {
+            background: #4a1d96;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 80%;
+            align-self: flex-end;
+        }
+        .ai-chat-helper.minimized {
+            transform: translateY(calc(100% - 60px));
+            animation: none;
+        }
+        /* Pulsing effect for the minimized chat */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(74, 29, 150, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(74, 29, 150, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 29, 150, 0);
+            }
+        }
+        .ai-chat-helper.minimized .ai-chat-header {
+            animation: pulse 2s infinite;
+        }
+        /* Hide the minimize button when minimized */
+        .ai-chat-helper.minimized .toggle-chat-btn {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Floating Icons Container -->
+    <div class="floating-icons">
+        <i class="fab fa-facebook floating-icon"></i>
+        <i class="fab fa-instagram floating-icon"></i>
+        <i class="fab fa-youtube floating-icon"></i>
+        <i class="fab fa-twitter floating-icon"></i>
+        <i class="fab fa-linkedin floating-icon"></i>
+        <i class="fab fa-tiktok floating-icon"></i>
+        <i class="fab fa-facebook floating-icon"></i>
+        <i class="fab fa-instagram floating-icon"></i>
+        <i class="fab fa-twitter floating-icon"></i>
+        <i class="fab fa-linkedin floating-icon"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white p-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="logo-container mr-3">
+                    <img src="mmc-logo.svg" alt="MMC Logo" class="w-full h-full">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-bold">MMC</span>
+                    <span class="text-sm">Mini Mind Creators</span>
+                </div>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container w-full md:w-1/3 mx-4">
+                <div class="relative">
+                    <input type="text" 
+                           id="searchInput"
+                           placeholder="Search services..." 
+                           class="w-full px-4 py-2 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    >
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600" id="searchIcon">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="spinner" id="searchSpinner"></div>
+                </div>
+                <div id="searchResults" class="search-results mt-2 p-2">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#home" class="hover:text-gray-200">Home</a>
+                <a href="#services" class="hover:text-gray-200">Services</a>
+                <a href="#contact" class="hover:text-gray-200">Contact</a>
+                
+                <!-- Social Media Icons in Nav -->
+                <div class="flex items-center space-x-4 ml-6 border-l pl-6 border-white/20">
+                    <a href="https://facebook.com" target="_blank" class="text-white hover:text-blue-400 transition-colors">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="text-white hover:text-pink-400 transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="text-white hover:text-red-400 transition-colors">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="text-white hover:text-blue-300 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-white hover:text-blue-400 transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Mobile Menu -->
+            <div class="md:hidden absolute top-full left-0 right-0 bg-purple-900 p-4 hidden">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-white hover:text-gray-200">Home</a>
+                    <a href="#services" class="text-white hover:text-gray-200">Services</a>
+                    <a href="#contact" class="text-white hover:text-gray-200">Contact</a>
+                    
+                    <!-- Social Media Icons for Mobile -->
+                    <div class="flex justify-center space-x-6 pt-4 border-t border-white/20">
+                        <a href="https://facebook.com" target="_blank" class="text-white hover:text-blue-400 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="text-white hover:text-pink-400 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="text-white hover:text-red-400 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="text-white hover:text-blue-300 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="text-white hover:text-blue-400 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Slider Section -->
+    <section class="py-10">
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <div class="slide active">
+                    <div class="slide-bg" style="background-image: url('assets/digital-marketing-diagram.jpg')"></div>
+                    <div class="slide-content">
+                        <h2 class="text-3xl font-bold mb-4 text-purple-900">Complete Digital Marketing Solutions</h2>
+                        <p class="text-gray-600 mb-6">Strategic integration of Content, Email, SEO, and Social Media Marketing</p>
+                        <div class="grid grid-cols-4 gap-4 mb-4">
+                            <div class="text-center">
+                                <i class="fas fa-pencil-alt text-2xl text-blue-600"></i>
+                                <p class="text-sm mt-1">Content</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-envelope text-2xl text-purple-600"></i>
+                                <p class="text-sm mt-1">Email</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-search text-2xl text-green-600"></i>
+                                <p class="text-sm mt-1">SEO</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-bullhorn text-2xl text-red-600"></i>
+                                <p class="text-sm mt-1">Campaign</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-bg" style="background-image: url('assets/digital-marketing-laptop.jpg')"></div>
+                    <div class="slide-content">
+                        <h2 class="text-3xl font-bold mb-4 text-purple-900">Multi-Platform Marketing</h2>
+                        <p class="text-gray-600 mb-6">Reach your audience across all digital channels with our integrated approach</p>
+                        <div class="flex justify-center items-center gap-6">
+                            <div class="text-center">
+                                <i class="fas fa-laptop text-3xl text-blue-600 mb-2"></i>
+                                <p class="text-sm">Web Presence</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-mobile-alt text-3xl text-purple-600 mb-2"></i>
+                                <p class="text-sm">Mobile Apps</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-share-alt text-3xl text-green-600 mb-2"></i>
+                                <p class="text-sm">Social Media</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-bg" style="background-image: url('assets/social-media-engagement.jpg')"></div>
+                    <div class="slide-content">
+                        <h2 class="text-3xl font-bold mb-4 text-purple-900">Boost Your Social Engagement</h2>
+                        <p class="text-gray-600 mb-6">Create meaningful connections and drive engagement with your audience</p>
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="bg-white/90 p-4 rounded-lg shadow">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">💬</div>
+                                <p class="text-sm font-medium">Active Community</p>
+                            </div>
+                            <div class="bg-white/90 p-4 rounded-lg shadow">
+                                <div class="text-2xl font-bold text-purple-600 mb-1">❤️</div>
+                                <p class="text-sm font-medium">High Engagement</p>
+                            </div>
+                            <div class="bg-white/90 p-4 rounded-lg shadow">
+                                <div class="text-2xl font-bold text-green-600 mb-1">🎯</div>
+                                <p class="text-sm font-medium">Targeted Reach</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-bg" style="background-image: url('assets/social-media-stats.jpg')"></div>
+                    <div class="slide-content">
+                        <h2 class="text-3xl font-bold mb-4 text-purple-900">Data-Driven Success</h2>
+                        <p class="text-gray-600 mb-6">Track and optimize your performance with real-time analytics</p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-white/90 p-4 rounded-lg shadow text-center">
+                                <i class="fas fa-chart-line text-3xl text-purple-600 mb-2"></i>
+                                <h4 class="font-semibold">Growth Analytics</h4>
+                                <p class="text-sm text-gray-600">Track your success metrics</p>
+                            </div>
+                            <div class="bg-white/90 p-4 rounded-lg shadow text-center">
+                                <i class="fas fa-users text-3xl text-blue-600 mb-2"></i>
+                                <h4 class="font-semibold">Audience Insights</h4>
+                                <p class="text-sm text-gray-600">Understand your audience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-bg" style="background-image: url('assets/social-media-icons.jpg')"></div>
+                    <div class="slide-content">
+                        <h2 class="text-3xl font-bold mb-4 text-purple-900">Cross-Platform Excellence</h2>
+                        <p class="text-gray-600 mb-6">Manage and grow your presence across all social media platforms</p>
+                        <div class="flex justify-center gap-8">
+                            <i class="fab fa-facebook text-4xl text-blue-600"></i>
+                            <i class="fab fa-instagram text-4xl text-pink-600"></i>
+                            <i class="fab fa-twitter text-4xl text-blue-400"></i>
+                            <i class="fab fa-linkedin text-4xl text-blue-700"></i>
+                            <i class="fab fa-youtube text-4xl text-red-600"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Image Gallery Slide -->
+                <div class="slide">
+                    <div class="slide-bg" style="background: linear-gradient(135deg, rgba(74, 29, 150, 0.1), rgba(124, 58, 237, 0.1))"></div>
+                    <div class="slide-content">
+                        <h2 class="text-3xl font-bold mb-4 text-purple-900">Our Digital Marketing Universe</h2>
+                        <p class="text-gray-600 mb-6">Explore our comprehensive digital marketing solutions</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform">
+                                <img src="assets/digital-marketing-diagram.jpg" alt="Digital Marketing Diagram" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform">
+                                <img src="assets/digital-marketing-laptop.jpg" alt="Digital Marketing Laptop" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform">
+                                <img src="assets/social-media-engagement.jpg" alt="Social Media Engagement" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform">
+                                <img src="assets/social-media-stats.jpg" alt="Social Media Stats" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform">
+                                <img src="assets/social-media-icons.jpg" alt="Social Media Icons" class="w-full h-full object-cover">
+                            </div>
+                            <div class="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform flex items-center justify-center bg-white">
+                                <div class="text-center p-4">
+                                    <i class="fas fa-chart-line text-4xl text-purple-600 mb-2"></i>
+                                    <p class="text-sm font-medium text-gray-600">Analytics & Growth</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="slider-button prev" onclick="moveSlide(-1)">❮</button>
+            <button class="slider-button next" onclick="moveSlide(1)">❯</button>
+            <div class="slider-nav" id="sliderNav"></div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6 glow-text">Transform Your Social Media Presence</h1>
+            <p class="text-xl mb-8">Professional social media management services by Mini Mind Creators</p>
+            <a href="#contact" class="glow-effect bg-white text-purple-900 px-8 py-3 rounded-full font-semibold hover:bg-opacity-90">
+                Get Started
+            </a>
+        </div>
+    </section>
+
+    <!-- After Hero Section and before Services Section -->
+    <section class="py-10">
+        <!-- Remove the duplicate slider section here -->
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="services-title-container">
+                <h2 class="services-title text-4xl">Our Services</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <a href="services/web-design.html" class="block">
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg hover-scale">
+                        <div class="text-4xl mb-4 glow-effect">💻</div>
+                        <h3 class="text-xl font-semibold mb-3">Web Designing</h3>
+                        <p class="text-gray-600 mb-4">Professional website development services</p>
+                    </div>
+                </a>
+                <a href="services/social-media.html" class="block">
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg hover-scale">
+                        <div class="text-4xl mb-4 glow-effect">📱</div>
+                        <h3 class="text-xl font-semibold mb-3">Social Media Management</h3>
+                        <p class="text-gray-600">Complete management of Facebook, Instagram, and YouTube accounts</p>
+                    </div>
+                </a>
+                <a href="services/ad-management.html" class="block">
+                    <div class="service-card bg-white p-6 rounded-lg shadow-lg hover-scale">
+                        <div class="text-4xl mb-4 glow-effect">📊</div>
+                        <h3 class="text-xl font-semibold mb-3">Ad Management</h3>
+                        <p class="text-gray-600">Strategic ad campaigns and performance reports</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 glow-text">Get in Touch</h2>
+            <div class="max-w-2xl mx-auto">
+                <form id="contactForm" class="space-y-6">
+                    <div class="glow-effect">
+                        <label class="block mb-2">Name</label>
+                        <input type="text" class="w-full p-3 rounded text-gray-800" required>
+                    </div>
+                    <div class="glow-effect">
+                        <label class="block mb-2">Email</label>
+                        <input type="email" class="w-full p-3 rounded text-gray-800" required>
+                    </div>
+                    <div class="glow-effect">
+                        <label class="block mb-2">Message</label>
+                        <textarea class="w-full p-3 rounded text-gray-800" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="glow-effect bg-white text-purple-900 px-8 py-3 rounded-full font-semibold hover:bg-opacity-90">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-xl mb-4">📞 +92 319863546</p>
+                <p class="text-xl mb-4">✉️ menahilnoor224@gmail.com</p>
+                <p class="text-xl mb-6">📍 Morgah Rawalpindi</p>
+                <!-- Social Media Icons -->
+                <div class="flex justify-center space-x-8 mt-8">
+                    <a href="https://facebook.com" target="_blank" class="text-white hover:scale-110 transition-transform">
+                        <i class="fab fa-facebook-square fa-3x"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="text-white hover:scale-110 transition-transform">
+                        <i class="fab fa-instagram fa-3x"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="text-white hover:scale-110 transition-transform">
+                        <i class="fab fa-youtube fa-3x"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="text-white hover:scale-110 transition-transform">
+                        <i class="fab fa-twitter-square fa-3x"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="text-white hover:scale-110 transition-transform">
+                        <i class="fab fa-linkedin fa-3x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <!-- Social Media Icons -->
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://facebook.com" target="_blank" class="text-white hover:text-purple-400 transition-colors">
+                    <i class="fab fa-facebook fa-2x"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="text-white hover:text-purple-400 transition-colors">
+                    <i class="fab fa-instagram fa-2x"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank" class="text-white hover:text-purple-400 transition-colors">
+                    <i class="fab fa-youtube fa-2x"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="text-white hover:text-purple-400 transition-colors">
+                    <i class="fab fa-twitter fa-2x"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" class="text-white hover:text-purple-400 transition-colors">
+                    <i class="fab fa-linkedin fa-2x"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 Mini Mind Creators. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Add JavaScript for search functionality -->
+    <script>
+        const services = [
+            {
+                title: 'Web Designing',
+                description: 'Professional website development services',
+                link: 'services/web-design.html'
+            },
+            {
+                title: 'Facebook Management',
+                description: 'Complete management of Facebook business presence',
+                link: 'services/facebook-management.html'
+            },
+            {
+                title: 'Instagram Management',
+                description: 'Strategic Instagram content and growth management',
+                link: 'services/instagram-management.html'
+            },
+            {
+                title: 'YouTube Management',
+                description: 'YouTube channel optimization and content strategy',
+                link: 'services/youtube-management.html'
+            },
+            {
+                title: 'Content Creation',
+                description: 'Professional content creation for all platforms',
+                link: 'services/content-creation.html'
+            },
+            {
+                title: 'Ad Management',
+                description: 'Strategic ad campaign management',
+                link: 'services/ad-management.html'
+            }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const searchIcon = document.getElementById('searchIcon');
+        const searchSpinner = document.getElementById('searchSpinner');
+
+        function startLoading() {
+            searchInput.classList.add('search-loading');
+            searchIcon.style.display = 'none';
+            searchSpinner.style.display = 'block';
+        }
+
+        function stopLoading() {
+            searchInput.classList.remove('search-loading');
+            searchIcon.style.display = 'block';
+            searchSpinner.style.display = 'none';
+        }
+
+        async function performSearch(searchTerm) {
+            startLoading();
+
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            const filteredServices = services.filter(service => 
+                service.title.toLowerCase().includes(searchTerm) ||
+                service.description.toLowerCase().includes(searchTerm)
+            );
+
+            if (filteredServices.length > 0) {
+                searchResults.innerHTML = filteredServices.map(service => `
+                    <a href="${service.link}" class="block p-2 hover:bg-gray-100 rounded">
+                        <div class="font-semibold text-purple-900">${service.title}</div>
+                        <div class="text-sm text-gray-600">${service.description}</div>
+                    </a>
+                `).join('');
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = `
+                    <div class="p-2 text-gray-600">No services found</div>
+                `;
+                searchResults.classList.add('active');
+            }
+
+            stopLoading();
+        }
+
+        // Handle real-time search
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            performSearch(searchTerm);
+        });
+
+        // Handle enter key press
+        searchInput.addEventListener('keypress', async function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const searchTerm = e.target.value.toLowerCase();
+                
+                if (searchTerm.length < 2) return;
+
+                startLoading();
+                
+                // Find the first matching service
+                const matchingService = services.find(service => 
+                    service.title.toLowerCase().includes(searchTerm) ||
+                    service.description.toLowerCase().includes(searchTerm)
+                );
+
+                // Simulate loading
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                if (matchingService) {
+                    window.location.href = matchingService.link;
+                }
+                
+                stopLoading();
+            }
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- Add this script before the closing body tag -->
+    <script>
+        // Slider functionality
+        let currentSlide = 0;
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const sliderNav = document.getElementById('sliderNav');
+
+        // Create navigation dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+            dot.onclick = () => goToSlide(index);
+            sliderNav.appendChild(dot);
+        });
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active states
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            
+            document.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        // Auto-advance slides
+        setInterval(() => moveSlide(1), 5000);
+
+        // Initial update
+        updateSlider();
+
+        // Text Click Light Effect
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add the effect class to all text elements
+            const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, a, span, div');
+            textElements.forEach(element => {
+                if (element.childNodes.length === 1 && element.childNodes[0].nodeType === 3) {
+                    element.classList.add('text-light-effect');
+                }
+            });
+
+            // Handle click events
+            document.addEventListener('click', function(e) {
+                const element = e.target;
+                if (element.classList.contains('text-light-effect')) {
+                    // Remove the animation class
+                    element.classList.remove('text-light-active');
+                    
+                    // Trigger reflow
+                    void element.offsetWidth;
+                    
+                    // Add the animation class
+                    element.classList.add('text-light-active');
+                    
+                    // Remove the animation class after it completes
+                    setTimeout(() => {
+                        element.classList.remove('text-light-active');
+                    }, 500);
+                }
+            });
+        });
+    </script>
+
+    <!-- AI Chat Helper -->
+    <div class="ai-chat-helper minimized" id="aiChatHelper">
+        <div class="ai-chat-header" onclick="toggleChat()">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-robot"></i>
+                <span class="font-semibold">MMC AI Assistant</span>
+            </div>
+            <button class="text-white hover:text-gray-200 toggle-chat-btn transition-transform duration-300">
+                <i class="fas fa-chevron-down" id="chatToggleIcon"></i>
+            </button>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-message">
+                Hello! 👋 I'm your MMC AI assistant. I can help you with:
+                <ul class="mt-2 ml-4 list-disc">
+                    <li>Web Design Services</li>
+                    <li>Social Media Management</li>
+                    <li>Ad Management</li>
+                    <li>Pricing and Packages</li>
+                    <li>General Information</li>
+                </ul>
+                How can I assist you today?
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="userInput" 
+                class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600" 
+                placeholder="Type your message...">
+            <button onclick="sendMessage()" 
+                class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let chatTimeout;
+        const TIMEOUT_DURATION = 30000; // 30 seconds
+
+        function startChatTimeout() {
+            clearTimeout(chatTimeout);
+            chatTimeout = setTimeout(() => {
+                const chatHelper = document.getElementById('aiChatHelper');
+                if (!chatHelper.classList.contains('minimized')) {
+                    toggleChat();
+                }
+            }, TIMEOUT_DURATION);
+        }
+
+        function toggleChat() {
+            const chatHelper = document.getElementById('aiChatHelper');
+            const toggleIcon = document.getElementById('chatToggleIcon');
+            chatHelper.classList.toggle('minimized');
+            toggleIcon.classList.toggle('fa-chevron-down');
+            toggleIcon.classList.toggle('fa-chevron-up');
+
+            if (!chatHelper.classList.contains('minimized')) {
+                startChatTimeout();
+            }
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBody = document.getElementById('chatBody');
+            const message = userInput.value.trim();
+
+            if (message) {
+                // Reset timeout when user sends a message
+                startChatTimeout();
+
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'user-message';
+                userMsg.textContent = message;
+                chatBody.appendChild(userMsg);
+
+                // Simulate AI response
+                setTimeout(() => {
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'ai-message';
+                    aiMsg.textContent = getAIResponse(message);
+                    chatBody.appendChild(aiMsg);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                    // Reset timeout after AI responds
+                    startChatTimeout();
+                }, 500);
+
+                userInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
+        function getAIResponse(message) {
+            const responses = {
+                // Web Design Responses
+                'web': 'Our web design services start from $499 for the Basic Package. We offer custom, responsive, and SEO-optimized websites. Would you like to know more about our web design packages?',
+                'website': 'We create professional websites with packages ranging from $499 to $1,999. Features include responsive design, SEO optimization, and e-commerce integration. Which aspect interests you?',
+                
+                // Social Media Responses
+                'social': 'Our social media management packages start from $299/mo. We handle content creation, posting, and engagement across all major platforms. Would you like details about our social media packages?',
+                'facebook': 'We manage Facebook and other social platforms with custom content creation, engagement strategies, and analytics. Our packages start from $299/mo for 2 platforms.',
+                'instagram': 'Our Instagram management includes content creation, stories, reels, and engagement strategies. It\'s included in all our social media packages.',
+                
+                // Ad Management Responses
+                'ads': 'Our ad management services start from $399/mo for campaigns with $1-3k monthly spend. We handle campaign strategy, optimization, and reporting. Would you like to know more?',
+                'advertising': 'We offer comprehensive ad management across multiple platforms, with packages starting from $399/mo. This includes campaign setup, optimization, and detailed reporting.',
+                
+                // General Responses
+                'pricing': 'We offer various services with different pricing tiers:\n- Web Design: $499 - $1,999\n- Social Media: $299 - $999/mo\n- Ad Management: $399 - $1,499/mo\nWhich service would you like to know more about?',
+                'package': 'We offer three tiers for each service: Basic/Starter, Professional/Growth, and Premium/Enterprise. Each comes with different features and benefits. Which service interests you?',
+                'contact': 'You can reach us through the contact form on our website, or I can help answer any immediate questions you have!',
+                'services': 'We offer three main services:\n1. Web Design (custom websites)\n2. Social Media Management (content & engagement)\n3. Ad Management (campaign optimization)\nWhich would you like to learn more about?',
+                'default': 'I\'d be happy to help you with our services. We specialize in web design, social media management, and ad management. What specific information are you looking for?'
+            };
+
+            message = message.toLowerCase();
+            if (message.includes('web') || message.includes('website')) return responses.web;
+            if (message.includes('social')) return responses.social;
+            if (message.includes('facebook') || message.includes('fb')) return responses.facebook;
+            if (message.includes('instagram') || message.includes('ig')) return responses.instagram;
+            if (message.includes('ad') || message.includes('campaign')) return responses.ads;
+            if (message.includes('advertising')) return responses.advertising;
+            if (message.includes('price') || message.includes('cost')) return responses.pricing;
+            if (message.includes('package') || message.includes('plan')) return responses.package;
+            if (message.includes('contact') || message.includes('reach')) return responses.contact;
+            if (message.includes('service')) return responses.services;
+            return responses.default;
+        }
+
+        // Reset timeout when user interacts with chat
+        document.getElementById('userInput').addEventListener('focus', startChatTimeout);
+        document.getElementById('chatBody').addEventListener('scroll', startChatTimeout);
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+            startChatTimeout();
+        });
+
+        // Initialize chat in minimized state
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatHelper = document.getElementById('aiChatHelper');
+            chatHelper.classList.add('minimized');
+        });
+    </script>
+</body>
+</html> 

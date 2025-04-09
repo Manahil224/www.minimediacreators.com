@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Design Services - MMC</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a0f3c 0%, #4a1d96 50%, #dc2626 100%);
+        }
+        .package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(74, 29, 150, 0.2);
+        }
+        .feature-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .feature-list li i {
+            color: #4a1d96;
+            margin-right: 0.5rem;
+        }
+        /* AI Chat Helper Styles */
+        .ai-chat-helper {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 360px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .ai-chat-header {
+            background: linear-gradient(135deg, #4a1d96, #7c3aed);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+        .ai-chat-body {
+            height: 400px;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .ai-chat-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        .ai-message {
+            background: #f3f4f6;
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 80%;
+            align-self: flex-start;
+        }
+        .user-message {
+            background: #4a1d96;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 12px;
+            max-width: 80%;
+            align-self: flex-end;
+        }
+        .ai-chat-helper.minimized {
+            transform: translateY(calc(100% - 60px));
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white p-4">
+        <div class="container mx-auto">
+            <a href="../index.html" class="text-2xl font-bold">MMC</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-purple-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">Professional Web Design Services</h1>
+            <p class="text-xl mb-8">Create a stunning online presence with our expert web design solutions</p>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="text-center p-6">
+                    <i class="fas fa-paint-brush text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Custom Design</h3>
+                    <p class="text-gray-600">Unique designs tailored to your brand identity</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-mobile-alt text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Responsive</h3>
+                    <p class="text-gray-600">Perfect display on all devices</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-rocket text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Optimized</h3>
+                    <p class="text-gray-600">Fast loading and SEO-friendly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Packages -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Our Web Design Packages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Basic Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$499</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> 5 Pages Website</li>
+                        <li><i class="fas fa-check"></i> Mobile Responsive Design</li>
+                        <li><i class="fas fa-check"></i> Contact Form</li>
+                        <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+                        <li><i class="fas fa-check"></i> Social Media Integration</li>
+                        <li><i class="fas fa-check"></i> 2 Rounds of Revisions</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Professional Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8 border-2 border-purple-600">
+                    <div class="text-center text-purple-600 text-sm font-bold mb-4">MOST POPULAR</div>
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Professional Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$999</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> 10 Pages Website</li>
+                        <li><i class="fas fa-check"></i> Custom Design</li>
+                        <li><i class="fas fa-check"></i> Advanced Contact Forms</li>
+                        <li><i class="fas fa-check"></i> Complete SEO Setup</li>
+                        <li><i class="fas fa-check"></i> Social Media Integration</li>
+                        <li><i class="fas fa-check"></i> Blog Setup</li>
+                        <li><i class="fas fa-check"></i> 4 Rounds of Revisions</li>
+                        <li><i class="fas fa-check"></i> Speed Optimization</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Premium Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$1,999</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> 20 Pages Website</li>
+                        <li><i class="fas fa-check"></i> Premium Custom Design</li>
+                        <li><i class="fas fa-check"></i> E-commerce Integration</li>
+                        <li><i class="fas fa-check"></i> Advanced SEO Setup</li>
+                        <li><i class="fas fa-check"></i> Social Media Integration</li>
+                        <li><i class="fas fa-check"></i> Blog & Newsletter Setup</li>
+                        <li><i class="fas fa-check"></i> Unlimited Revisions</li>
+                        <li><i class="fas fa-check"></i> Speed Optimization</li>
+                        <li><i class="fas fa-check"></i> Security Setup</li>
+                        <li><i class="fas fa-check"></i> 1 Year Free Maintenance</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Get Started Today</h2>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block mb-2">Name</label>
+                        <input type="text" class="w-full p-3 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Email</label>
+                        <input type="email" class="w-full p-3 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Package</label>
+                        <select class="w-full p-3 rounded border" required>
+                            <option value="">Select a Package</option>
+                            <option value="basic">Basic Package</option>
+                            <option value="professional">Professional Package</option>
+                            <option value="premium">Premium Package</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Message</label>
+                        <textarea class="w-full p-3 rounded border" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Helper -->
+    <div class="ai-chat-helper" id="aiChatHelper">
+        <div class="ai-chat-header">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-robot"></i>
+                <span class="font-semibold">MMC AI Assistant</span>
+            </div>
+            <button onclick="toggleChat()" class="text-white hover:text-gray-200">
+                <i class="fas fa-minus" id="chatToggleIcon"></i>
+            </button>
+        </div>
+        <div class="ai-chat-body" id="chatBody">
+            <div class="ai-message">
+                Hello! 👋 I'm your MMC AI assistant. I can help you:
+                <ul class="mt-2 ml-4 list-disc">
+                    <li>Choose the right web design package</li>
+                    <li>Explain our services in detail</li>
+                    <li>Answer questions about pricing</li>
+                    <li>Provide technical information</li>
+                </ul>
+                How can I assist you today?
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="userInput" 
+                class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600" 
+                placeholder="Type your message...">
+            <button onclick="sendMessage()" 
+                class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const chatHelper = document.getElementById('aiChatHelper');
+            const toggleIcon = document.getElementById('chatToggleIcon');
+            chatHelper.classList.toggle('minimized');
+            toggleIcon.classList.toggle('fa-minus');
+            toggleIcon.classList.toggle('fa-plus');
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBody = document.getElementById('chatBody');
+            const message = userInput.value.trim();
+
+            if (message) {
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'user-message';
+                userMsg.textContent = message;
+                chatBody.appendChild(userMsg);
+
+                // Simulate AI response
+                setTimeout(() => {
+                    const aiMsg = document.createElement('div');
+                    aiMsg.className = 'ai-message';
+                    aiMsg.textContent = getAIResponse(message);
+                    chatBody.appendChild(aiMsg);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 500);
+
+                userInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
+        function getAIResponse(message) {
+            const responses = {
+                'pricing': 'Our web design packages start from $499 for the Basic Package. The Professional Package is $999, and the Premium Package is $1,999. Each package includes different features and services. Would you like me to explain the details of any specific package?',
+                'package': 'We offer three packages: Basic, Professional, and Premium. The Professional Package is our most popular choice, offering 10 pages, custom design, SEO setup, and more. Which package would you like to know more about?',
+                'contact': 'You can reach us through the contact form below, or I can help answer any immediate questions you have!',
+                'default': 'I\'d be happy to help you with that. Could you please provide more details about what you\'re looking for?'
+            };
+
+            message = message.toLowerCase();
+            if (message.includes('price') || message.includes('cost')) return responses.pricing;
+            if (message.includes('package') || message.includes('plan')) return responses.package;
+            if (message.includes('contact') || message.includes('reach')) return responses.contact;
+            return responses.default;
+        }
+
+        // Add event listener for Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Mini Mind Creators. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

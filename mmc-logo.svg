@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Outer Triangle -->
+    <path d="M100 10 L190 170 L10 170 Z" 
+          fill="none" 
+          stroke="#4a1d96" 
+          stroke-width="8"/>
+    
+    <!-- Inner Triangle -->
+    <path d="M100 40 L160 150 L40 150 Z" 
+          fill="none" 
+          stroke="#dc2626" 
+          stroke-width="8"/>
+          
+    <!-- MMC Text -->
+    <text x="100" y="190" 
+          text-anchor="middle" 
+          font-family="Arial, sans-serif" 
+          font-weight="bold" 
+          font-size="24" 
+          fill="#4a1d96">MMC</text>
+</svg> 

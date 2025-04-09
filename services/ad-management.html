@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Management Services - MMC</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a0f3c 0%, #4a1d96 50%, #dc2626 100%);
+        }
+        .package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(74, 29, 150, 0.2);
+        }
+        .feature-list li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .feature-list li i {
+            color: #4a1d96;
+            margin-right: 0.5rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4a1d96;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white p-4">
+        <div class="container mx-auto">
+            <a href="../index.html" class="text-2xl font-bold">MMC</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-purple-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">Ad Management Services</h1>
+            <p class="text-xl mb-8">Strategic advertising solutions to maximize your ROI</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
+                <div class="stat-card">
+                    <div class="stat-number">30%</div>
+                    <p class="text-gray-600">Average CTR Increase</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50%</div>
+                    <p class="text-gray-600">Cost Reduction</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <p class="text-gray-600">Client Satisfaction</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2x</div>
+                    <p class="text-gray-600">ROI Improvement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="text-center p-6">
+                    <i class="fas fa-ad text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Campaign Strategy</h3>
+                    <p class="text-gray-600">Data-driven ad campaign planning</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-chart-pie text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Performance Tracking</h3>
+                    <p class="text-gray-600">Real-time monitoring and optimization</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-bullseye text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Audience Targeting</h3>
+                    <p class="text-gray-600">Precise audience segmentation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Packages -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Our Ad Management Packages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Starter Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$399/mo</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> $1,000-$3,000 Ad Spend</li>
+                        <li><i class="fas fa-check"></i> 2 Ad Platforms</li>
+                        <li><i class="fas fa-check"></i> Basic Campaign Setup</li>
+                        <li><i class="fas fa-check"></i> Monthly Optimization</li>
+                        <li><i class="fas fa-check"></i> Basic Performance Reports</li>
+                        <li><i class="fas fa-check"></i> Email Support</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Professional Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8 border-2 border-purple-600">
+                    <div class="text-center text-purple-600 text-sm font-bold mb-4">MOST POPULAR</div>
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Growth Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$799/mo</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> $3,000-$10,000 Ad Spend</li>
+                        <li><i class="fas fa-check"></i> 4 Ad Platforms</li>
+                        <li><i class="fas fa-check"></i> Advanced Campaign Setup</li>
+                        <li><i class="fas fa-check"></i> Weekly Optimization</li>
+                        <li><i class="fas fa-check"></i> Detailed Analytics Reports</li>
+                        <li><i class="fas fa-check"></i> A/B Testing</li>
+                        <li><i class="fas fa-check"></i> Retargeting Campaigns</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+
+                <!-- Premium Package -->
+                <div class="package-card bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-purple-900 mb-4">Enterprise Package</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-6">$1,499/mo</div>
+                    <ul class="feature-list mb-8">
+                        <li><i class="fas fa-check"></i> $10,000+ Ad Spend</li>
+                        <li><i class="fas fa-check"></i> All Ad Platforms</li>
+                        <li><i class="fas fa-check"></i> Custom Campaign Strategy</li>
+                        <li><i class="fas fa-check"></i> Daily Optimization</li>
+                        <li><i class="fas fa-check"></i> Real-time Analytics</li>
+                        <li><i class="fas fa-check"></i> Advanced A/B Testing</li>
+                        <li><i class="fas fa-check"></i> Custom Audience Creation</li>
+                        <li><i class="fas fa-check"></i> Competitor Analysis</li>
+                        <li><i class="fas fa-check"></i> 24/7 Dedicated Support</li>
+                        <li><i class="fas fa-check"></i> ROI Guarantee</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Get Started Today</h2>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block mb-2">Name</label>
+                        <input type="text" class="w-full p-3 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Email</label>
+                        <input type="email" class="w-full p-3 rounded border" required>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Monthly Ad Budget</label>
+                        <select class="w-full p-3 rounded border" required>
+                            <option value="">Select Budget Range</option>
+                            <option value="1000-3000">$1,000 - $3,000</option>
+                            <option value="3000-10000">$3,000 - $10,000</option>
+                            <option value="10000+">$10,000+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Package</label>
+                        <select class="w-full p-3 rounded border" required>
+                            <option value="">Select a Package</option>
+                            <option value="starter">Starter Package</option>
+                            <option value="growth">Growth Package</option>
+                            <option value="enterprise">Enterprise Package</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block mb-2">Message</label>
+                        <textarea class="w-full p-3 rounded border" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Mini Mind Creators. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
